@@ -1,0 +1,72 @@
+﻿@model WcfService.ModelsDto.UserCreateDto
+
+@{
+    ViewBag.Title = "Crear";
+}
+
+<h2>Crear Usuario</h2>
+
+
+@using (Html.BeginForm("CreateUserPost", "User",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group ">
+
+            @Html.Label("Nombre Completo", htmlAttributes: new { @class = "control-label col-md-2", style = "text-align:left" })
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control " } })
+                @Html.ValidationMessageFor(Model => Model.FullName, "El campo 'Nombre' es un obligatorio", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-group" >
+
+            @Html.Label("Fecha de Nacimeito", htmlAttributes: new { @class = "control-label col-md-2", style = "text-align:left" })
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BirtDay, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(Model => Model.BirtDay, "El campo 'Fecha de nacimiento' es un obligatorio", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            @Html.Label("Cédula", htmlAttributes: new { @class = "control-label col-md-2", style = "text-align:left" })
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CardNumberId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(Model => Model.CardNumberId, $"El campo 'Cédula' es un obligatorio", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn-primary" />
+
+            </div>
+
+        </div>
+
+    </div>
+}
+
+<br />
+<br />
+<div style="border:1px  dashed Gray;">
+
+    @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-block" })
+
+</div>
+

@@ -1,0 +1,42 @@
+﻿@model List<WcfService.ModelsDto>
+
+@{
+    ViewBag.Title = "Detalle de factura";
+}
+
+<h2>Factura</h2>
+
+<br />
+<hr />
+<table class="table">
+
+    <thead>
+
+        <tr>
+            <td><strong>NÚMERO DE FACTURA</strong></td>
+            <td><strong>USUARIO</strong></td>
+            <td><strong>FECHA DE EMISIÓN DE LA FACTURA</strong></td>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var Invoice in Model)
+        {
+            <tr>
+                <td>@Invoice.Id</td>
+                <td>@Invoice.User</td>
+                <td>@Invoice.DateIssued</td>
+                <td>
+                    @Html.ActionLink("Detalle", "DetalleInvoice", new { id = Invoice.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Editar", "EditInvoice", new { id = Invoice.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Eliminar", "DeleteInvoice", new { id = Invoice.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+

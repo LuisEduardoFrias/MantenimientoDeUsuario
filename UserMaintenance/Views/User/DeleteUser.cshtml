@@ -1,0 +1,38 @@
+﻿@model WcfService.Models.User
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar usuario @Model.FullName</h2>
+
+<hr />
+
+<div class="form-group">
+
+    <div style="padding-bottom:10px;">
+        @Html.Label("NOMBRE: ")
+        @Html.Label(Model.FullName)
+    </div>
+
+    <div style="padding-bottom:10px;">
+        @Html.Label("FECHA DE NACIMIENTO: ")
+        @Html.Label(Model.BirtDay.ToString("yyyy/MM/dd"))
+    </div>
+
+    <div style="padding-bottom:10px;">
+        @Html.Label("CÉDULA: ")
+        @Html.Label(Model.CardNumberId)
+    </div>
+
+</div>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" class="btn btn-danger" value="Eliminar" />
+    @Html.ActionLink("Volver", "Index", "", new { @class = "btn btn-primary" })
+}
+

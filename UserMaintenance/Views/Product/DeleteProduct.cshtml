@@ -1,0 +1,45 @@
+﻿@model WcfService.Models.Product
+@using System.Globalization;
+
+@{
+    ViewBag.Title = "Eliminar producto";
+}
+
+<h2>Eliminar producto > @Model.Name</h2>
+
+<hr />
+
+<div class="form-group">
+
+    <div style="padding-bottom:10px;">  
+        @Html.Label("NOMBRE: ")
+        @Html.Label(Model.Name)
+    </div>
+
+    <div style="padding-bottom:10px;">
+        @Html.Label("DESCRIPCIÓN: ")
+        @Html.Label(Model.Description)
+    </div>
+
+    <div style="padding-bottom:10px;">
+        @Html.Label("PRECIO: ")
+        <label>@string.Format(CultureInfo.GetCultureInfo("es-DO"), "{0:C2}", Model.Price)</label>
+    </div>
+
+    <div style="padding-bottom:10px;">
+        @Html.Label("CANTIDAD: ")
+        @Html.Label(Model.Quantity.ToString())
+    </div>
+
+</div>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <input type="submit" class="btn btn-danger" value="Eliminar" />
+    @Html.ActionLink("Volver", "Index", "", new { @class = "btn btn-primary" })
+}
+

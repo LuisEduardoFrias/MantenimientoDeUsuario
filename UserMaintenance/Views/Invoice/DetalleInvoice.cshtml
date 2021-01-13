@@ -1,0 +1,59 @@
+﻿@model List<WcfService.Models.InvoiceDetail>
+
+@{
+    ViewBag.Title = "Detalle de factura";
+}
+
+<h2>Factura</h2>
+
+<hr />
+
+<div class="form-group">
+
+    <div style="padding-bottom:10px;">
+        @Html.Label("NUNMERO DE FATURA: ")
+        <label> @ViewBag.Id </label>
+    </div>
+
+    <div style="padding-bottom:10px;">
+        @Html.Label("USUARIO: ")
+        <label> @ViewBag.UserName </label>
+    </div>
+
+    <div style="padding-bottom:10px;">
+        @Html.Label("FECHA EMISIÓN DE FACTURA: ")
+        <label> @ViewBag.DateIssued </label>
+    </div>
+
+</div>
+
+<hr />
+
+
+<br />
+<hr />
+<table class="table">
+
+    <thead>
+
+        <tr>
+            <td><strong>PRODUCTO</strong></td>
+            <td><strong>CANTIDAD</strong></td>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var Invoice in Model)
+        {
+            <tr>
+                <td>@Invoice.Product.Name</td>
+                <td>@Invoice.Quantity</td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+

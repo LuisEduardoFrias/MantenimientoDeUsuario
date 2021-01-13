@@ -1,0 +1,85 @@
+﻿@model WcfService.ModelsDto.ProductCreateDto
+
+@{
+    ViewBag.Title = "Crear";
+}
+
+<h2>Crear Producto</h2>
+
+
+@using (Html.BeginForm("CreateProductPost", "Product",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group ">
+
+        @Html.Label("PRODUCTO", htmlAttributes: new { @class = "control-label col-md-2", style = "text-align:left" })
+
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control " } })
+            @Html.ValidationMessageFor(Model => Model.Name, "El campo 'Nombre' es obligatiorio", new { @class = "text-danger" })
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        @Html.Label("DESCRIPCIÓN", htmlAttributes: new { @class = "control-label col-md-2", style = "text-align:left" })
+
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(Model => Model.Description, "El campo 'Descripción' es obligatiorio", new { @class = "text-danger" })
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        @Html.Label("PRECIO", htmlAttributes: new { @class = "control-label col-md-2", style = "text-align:left" })
+
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(Model => Model.Price, "El campo 'Precio' es obligatiorio", new { @class = "text-danger" })
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        @Html.Label("CANTIDAD", htmlAttributes: new { @class = "control-label col-md-2", style = "text-align:left" })
+
+        <div class="col-md-10">
+
+            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Quantity, "El campo 'Cantidad' es obligatorio", new { @class = "text-danger" })
+
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Crear" class="btn-primary" />
+
+        </div>
+
+    </div>
+
+</div>
+}
+
+<br />
+<br />
+<div style="border:1px  dashed Gray;">
+
+    @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-block" })
+
+</div>
+

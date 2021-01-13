@@ -1,0 +1,44 @@
+﻿@model List<WcfService.Models.User>
+@{
+    ViewBag.Title = "Listado de usuario";
+}
+
+<h2>Usuarios</h2>
+
+<br />
+@Html.ActionLink("Crear nuevo usuario", "CreateUser", null, new { @class = "btn btn-primary" })
+
+<br />
+<hr />
+<table class="table">
+
+    <thead>
+        <tr>
+            <td class="hidden"><strong>ID</strong></td>
+            <td><strong>NOMBRE</strong></td>
+            <td><strong>FECHA DE NACIMIENTO</strong></td>
+            <td><strong>CEDULA</strong></td>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td class="hidden">@user.Id</td>
+                <td>@user.FullName</td>
+                <td>@user.BirtDay.ToString("dd/MM/yyyy")</td>
+                <td>@user.CardNumberId</td>
+                <td>
+                    @Html.ActionLink("Editar", "EditUser", new { id = user.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Eliminar", "DeleteUser", new { id = user.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+

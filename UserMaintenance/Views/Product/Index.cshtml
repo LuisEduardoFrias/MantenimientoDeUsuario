@@ -1,0 +1,48 @@
+﻿@model List<WcfService.Models.Product>
+@using System.Globalization;
+
+@{
+    ViewBag.Title = "Listado de Producto";
+}
+
+<h2>Productos</h2>
+
+<br />
+@Html.ActionLink("Crear nuevo producto", "CreateProduct", null, new { @class = "btn btn-primary" })
+
+<br />
+<hr />
+<table class="table">
+
+    <thead>
+        <tr>
+            <td class="hidden"><strong>ID</strong></td>
+            <td><strong>NOMBRE</strong></td>
+            <td><strong>DESCRIPCIÓN</strong></td>
+            <td><strong>PRECIO</strong></td>
+            <td><strong>CANTIDAD</strong></td>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td class="hidden">@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@string.Format(CultureInfo.GetCultureInfo("es-DO"), "{0:C2}", product.Price)</td>
+                <td>@product.Quantity</td>
+                <td>
+                    @Html.ActionLink("Editar", "Editproduct", new { id = product.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Eliminar", "Deleteproduct", new { id = product.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+

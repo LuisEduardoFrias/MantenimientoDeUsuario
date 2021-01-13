@@ -1,0 +1,43 @@
+﻿@model List<WcfService.Models.Invoice>
+
+@{
+    ViewBag.Title = "Listado de facturas";
+}
+
+<h2>Facturas</h2>
+
+<br />
+@Html.ActionLink("Crear nuevo factura", "CreateInvoice", null, new { @class = "btn btn-primary" })
+
+<br />
+<hr />
+<table class="table">
+
+    <thead>
+
+        <tr>
+            <td ><strong>NÚMERO DE FACTURA</strong></td>
+            <td><strong>USUARIO</strong></td>
+            <td><strong>FECHA DE EMISIÓN DE LA FACTURA</strong></td>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var Invoice in Model)
+        {
+            <tr>
+                <td>@Invoice.Id</td>
+                <td>@Invoice.User.FullName</td>
+                <td>@Invoice.DateIssued</td>
+                <td>
+                    @Html.ActionLink("Ver Detalles", "DetalleInvoice", new { id = Invoice.User.Id }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
