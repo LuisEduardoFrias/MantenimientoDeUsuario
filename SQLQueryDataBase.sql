@@ -254,9 +254,9 @@ begin
            Products.Name_ as PRODUCTO,           
            Products.Price as PRECIO
 
-           From InvoiceDetails join Invoices     on InvoiceDetails.Id         = Invoices.Id
-                              join Users         on InvoiceDetails.User_      = Users.Id
-                              join Products      on InvoiceDetails.Product    = Products.Id
+           From InvoiceDetails join Invoices     on InvoiceDetails.Invoice     = Invoices.Id
+                               join Users         on InvoiceDetails.User_      = Users.Id
+                               join Products      on InvoiceDetails.Product    = Products.Id
 
 end
 GO
@@ -279,9 +279,9 @@ begin
            Products.Name_ as PRODUCTO,           
            Products.Price as PRECIO
 
-           From InvoiceDetails join Invoices     on InvoiceDetails.Id         = Invoices.Id
-                              join Users         on InvoiceDetails.User_      = Users.Id
-                              join Products      on InvoiceDetails.Product    = Products.Id
+           From InvoiceDetails join Invoices     on InvoiceDetails.Invoice     = Invoices.Id
+                               join Users         on InvoiceDetails.User_      = Users.Id
+                               join Products      on InvoiceDetails.Product    = Products.Id
          where InvoiceDetails.User_ = @Id
 
 end
@@ -358,12 +358,12 @@ insert into InvoiceDetails values
 (10	,1	,1	,4),
 (2	,1	,1	,5),
 (4	,1	,1	,6),
-(3	,2	,3	,6),
-(6	,2	,3	,7),
-(7	,2	,3	,8),
-(19	,3	,1	,6),
-(1	,3	,1	,4),
-(7	,3	,1	,7),
+(3	,2	,2	,6),
+(6	,2	,2	,7),
+(7	,2	,2	,8),
+(19	,3	,3	,6),
+(1	,3	,3	,4),
+(7	,3	,3	,7),
 (6	,4	,4	,6),
 (5	,4	,4	,4)
 GO

@@ -23,7 +23,7 @@ namespace UserMaintenance.Controllers
         public async Task<ActionResult> Index() =>
             View(await _userClient.ShowAsync());
 
-        public async Task<ActionResult> CreateUser(UserCreateDto user) =>
+        public ActionResult CreateUser(UserCreateDto user) =>
             View(user);
 
         public async Task<ActionResult> EditUser(int? id)

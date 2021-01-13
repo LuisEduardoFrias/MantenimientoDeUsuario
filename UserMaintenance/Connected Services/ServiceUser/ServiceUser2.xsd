@@ -24,7 +24,7 @@
   <xs:element name="ShowIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WcfService.Models" minOccurs="0" name="ShowIdResult" nillable="true" type="q2:ArrayOfUser" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WcfService.Models" minOccurs="0" name="ShowIdResult" nillable="true" type="q2:User" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

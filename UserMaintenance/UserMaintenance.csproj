@@ -196,13 +196,6 @@
     <None Include="Connected Services\ServiceProduct\ServiceProduct3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceUser\ServiceUser.disco" />
-    <None Include="Connected Services\ServiceUser\configuration91.svcinfo" />
-    <None Include="Connected Services\ServiceUser\configuration.svcinfo" />
-    <None Include="Connected Services\ServiceUser\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <None Include="Connected Services\ServiceProduct\ServiceProduct.disco" />
     <None Include="Connected Services\ServiceProduct\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceProduct\configuration.svcinfo" />
@@ -221,6 +214,13 @@
     <None Include="Connected Services\ServiceInvoice\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceInvoice\configuration.svcinfo" />
     <None Include="Connected Services\ServiceInvoice\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceUser\ServiceUser.disco" />
+    <None Include="Connected Services\ServiceUser\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceUser\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceUser\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -282,7 +282,7 @@
     <Content Include="Views\User\DeleteUser.cshtml" />
     <Content Include="Views\User\CreateUser.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\User\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Product\CreateProduct.cshtml" />
     <Content Include="Views\Product\DeleteProduct.cshtml" />
     <Content Include="Views\Product\EditProduct.cshtml" />
@@ -291,6 +291,7 @@
     <Content Include="Views\Invoice\DeleteInvoice.cshtml" />
     <Content Include="Views\Invoice\DetalleInvoice.cshtml" />
     <Content Include="Views\Invoice\CreateInvoice.cshtml" />
+    <Content Include="Views\Invoice\CreateInvoicePost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -23,7 +23,7 @@ namespace UserMaintenance.Controllers
         public async Task<ActionResult> Index() =>
             View(await _productClient.ShowAsync());
 
-        public async Task<ActionResult> CreateProduct(ProductCreateDto Product) =>
+        public ActionResult CreateProduct(ProductCreateDto Product) =>
             View(Product);
 
         public async Task<ActionResult> EditProduct(int? id)

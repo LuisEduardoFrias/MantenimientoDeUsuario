@@ -1,20 +1,21 @@
 ﻿
 namespace UserMaintenance.Controllers
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     //
     using UserMaintenance.ServiceInvoice;
     using UserMaintenance.ServiceInvoiceDetail;
+    using UserMaintenance.ServiceUser;
     using WcfService.ModelsDto;
     //
 
     public class InvoiceController : BaseController
     {
-
         readonly ServiceInvoiceClient _InvoiceClient;
-        readonly ServiceInvoiceDetailClient _invoiceDetailClient; 
-       public InvoiceController()
+        readonly ServiceInvoiceDetailClient _invoiceDetailClient;
+        public InvoiceController()
         {
             _InvoiceClient = new ServiceInvoiceClient();
             _invoiceDetailClient = new ServiceInvoiceDetailClient();
@@ -25,8 +26,29 @@ namespace UserMaintenance.Controllers
             View(await _InvoiceClient.ShowAsync());
 
 
-        public ActionResult CreateInvoice(InvoiceDetailCreateDto invoices) =>
-            View(invoices);
+        public async Task<ActionResult> CreateInvoice(InvoiceDetailCreateDto invoices)
+        {
+            @ViewBag.Users = await GetListUser();
+
+            return  View(invoices);
+        }
+            
+
+        private async Task<List<SelectListItem>> GetListUser()
+        {
+            ServiceUserClient _UserClient = new ServiceUserClient();
+
+            List<SelectListItem> selectListItems = new List<SelectListItem>();
+
+            foreach (var user in await _UserClient.ShowAsync())
+                selectListItems.Add(new SelectListItem
+                {
+                    Text = user.FullName,
+                    Value = user.Id.ToString()
+                });
+
+            return selectListItems;
+        }
 
 
         public async Task<ActionResult> DetalleInvoice(int? id)
@@ -48,8 +70,18 @@ namespace UserMaintenance.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult CreateInvoicePost(InvoiceDetailCreateDto invoices) =>
-            View(invoices);
+        public ActionResult CreateInvoicePost(InvoiceDetailCreateDto invoices)
+        {
+            return View(invoices);
+        }
+
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult CreateInvoiceDetailPost(InvoiceDetailCreateDto invoices)
+        {
+            return Redirect("Index");
+        }
 
     }
 }

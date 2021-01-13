@@ -11,7 +11,7 @@
 <div class="form-group">
 
     <div style="padding-bottom:10px;">
-        @Html.Label("NUNMERO DE FATURA: ")
+        @Html.Label("NÚMERO DE FATURA: ")
         <label> @ViewBag.Id </label>
     </div>
 
@@ -56,4 +56,10 @@
     </tbody>
 
 </table>
+
+<div style="border:1px  dashed Gray;">
+
+    @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-block" })
+
+</div>
 

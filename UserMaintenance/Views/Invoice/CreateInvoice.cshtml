@@ -4,7 +4,7 @@
     ViewBag.Title = "CreateInvoice";
 }
 
-<h2>CreateInvoice</h2>
+<h2>Creando un factura</h2>
 
 
 @using (Html.BeginForm("CreateInvoicePost", "Invoice", FormMethod.Post))
@@ -12,24 +12,51 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>InvoiceDetailCreateDto</h4>
-        <hr />
+    <hr />
+
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
-            </div>
+
+        <div class="form-group enb">
+
+            @Html.Label("Fecha de emisión", htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <fieldset disabled>
+
+                <div class="col-md-10">
+
+                    @Html.EditorFor(model => model.Invoice.DateIssued, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Invoice.DateIssued, "", new { @class = "text-danger " })
+
+                </div>
+
+            </fieldset>
+
         </div>
 
         <div class="form-group">
+
+            @Html.Label("Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+
+                @Html.DropDownList("ListUser", (List<SelectListItem>)ViewBag.Users, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User.Id, "", new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
+
         </div>
+
     </div>
-}
+ }
 
 <div>
     @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-primary" })
