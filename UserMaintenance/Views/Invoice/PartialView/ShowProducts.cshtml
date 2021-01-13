@@ -1,0 +1,35 @@
+﻿@using System.Globalization;
+
+@model List<WcfService.Models.Product>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <td class="hidden"><strong>ID</strong></td>
+            <td><strong>NOMBRE</strong></td>
+            <td><strong>PRECIO</strong></td>
+            <td><strong>CANTIDAD</strong></td>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td class="hidden">@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@string.Format(CultureInfo.GetCultureInfo("es-DO"), "{0:C2}", product.Price)</td>
+                <td>@product.Quantity</td>
+                <td>
+                    <input type="button" value="Quitar producto" id="QuitarProducto" class="btn btn-danger" />
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+

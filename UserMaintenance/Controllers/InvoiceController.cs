@@ -7,7 +7,9 @@ namespace UserMaintenance.Controllers
     //
     using UserMaintenance.ServiceInvoice;
     using UserMaintenance.ServiceInvoiceDetail;
+    using UserMaintenance.ServiceProduct;
     using UserMaintenance.ServiceUser;
+    using WcfService.Models;
     using WcfService.ModelsDto;
     //
 
@@ -29,6 +31,7 @@ namespace UserMaintenance.Controllers
         public async Task<ActionResult> CreateInvoice(InvoiceDetailCreateDto invoices)
         {
             @ViewBag.Users = await GetListUser();
+            @ViewBag.Products = await GetListProducts();
 
             return  View(invoices);
         }
@@ -50,6 +53,18 @@ namespace UserMaintenance.Controllers
             return selectListItems;
         }
 
+
+        private async Task<List<Product>> GetListProducts()
+        {
+            ServiceProductClient _ProductClient = new ServiceProductClient();
+
+            return await _ProductClient.ShowAsync();   
+        }
+
+        public ActionResult ShowProductPartialView()
+        {
+            return PartialView();
+        }
 
         public async Task<ActionResult> DetalleInvoice(int? id)
         {
@@ -73,14 +88,6 @@ namespace UserMaintenance.Controllers
         public ActionResult CreateInvoicePost(InvoiceDetailCreateDto invoices)
         {
             return View(invoices);
-        }
-
-
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        public ActionResult CreateInvoiceDetailPost(InvoiceDetailCreateDto invoices)
-        {
-            return Redirect("Index");
         }
 
     }

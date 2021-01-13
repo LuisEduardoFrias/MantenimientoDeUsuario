@@ -20,8 +20,11 @@ namespace UserMaintenance.Controllers
 
 
 
-        public async Task<ActionResult> Index() =>
-            View(await _userClient.ShowAsync());
+        public async Task<ActionResult> Index()
+        {
+           return View(await _userClient.ShowAsync());
+        }
+
 
         public ActionResult CreateUser(UserCreateDto user) =>
             View(user);

@@ -1,7 +1,14 @@
 ﻿@model WcfService.ModelsDto.InvoiceDetailCreateDto
 
+
 @{
     ViewBag.Title = "CreateInvoice";
+
+    List<WcfService.Models.Product> ListProducts = new List<WcfService.Models.Product>();
+
+    List<SelectListItem> selectListItems = new List<SelectListItem>();
+
+    GetSelectListItemProduct();
 }
 
 <h2>Creando un factura</h2>
@@ -12,20 +19,20 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-    <hr />
+        <hr />
 
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group enb">
 
-            @Html.Label("Fecha de emisión", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Fecha de emisión", htmlAttributes: new { @class = "control-label col-md-2", style = "text-align:left" })
 
             <fieldset disabled>
 
                 <div class="col-md-10">
 
-                    @Html.EditorFor(model => model.Invoice.DateIssued, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DisplayFor(model => model.Invoice.DateIssued, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Invoice.DateIssued, "", new { @class = "text-danger " })
 
                 </div>
@@ -36,12 +43,32 @@
 
         <div class="form-group">
 
-            @Html.Label("Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Usuario", htmlAttributes: new { @class = "control-label col-md-2", style = "text-align:left" })
 
             <div class="col-md-10">
 
                 @Html.DropDownList("ListUser", (List<SelectListItem>)ViewBag.Users, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User.Id, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.User.Id, "Seleccione un cliente", new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+
+
+        @Html.HiddenFor(model => model.User.Id)
+
+        <hr />
+
+        @{Model.Product = ListProducts;}
+
+        <div class="form-group">
+
+            @Html.Label("Productos", htmlAttributes: new { @class = "control-label col-md-2", style = "text-align:left" })
+
+            <div class="col-md-10">
+
+                @Html.DropDownList("ListProduct", selectListItems, new { htmlAttributes = new { @class = "form-control", name = "DropDownListProduct", id = "DropDownListProduct" } })
+                @Html.ValidationMessageFor(model => model.Product, "", new { @class = "text-danger" })
 
             </div>
 
@@ -49,15 +76,90 @@
 
         <div class="form-group">
 
+            @Html.Label("Cantidad", htmlAttributes: new { @class = "control-label col-md-2", style = "text-align:left" })
+
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantity, "El campo 'Cantidad' es obligatorio", new { @class = "text-danger", style = "width:130px;" })
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <button type="button" class="btn btn-primary" onclick="llamarVistaParcial();" data-toggle="modal" data-target="#myModal">
+                Agregar Producto
+            </button>
+
+        </div>
+
+        <hr />
+
+        <div class="form-group" style="position:absolute; top:75px; right:30%;">
+
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create Factura" class="btn btn-default" />
             </div>
 
         </div>
 
     </div>
- }
+
+}
+
+<hr />
+
+<div class="modal-body">
+    <div id="resultado">
+        @Html.Partial("PartialView/ShowProducts", ListProducts)
+    </div>
+</div>
+
+
+<hr />
+
+
 
 <div>
     @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-primary" })
 </div>
+
+
+@{
+
+    void GetSelectListItemProduct()
+    {
+        foreach (WcfService.Models.Product product in (List<WcfService.Models.Product>)ViewBag.Products)
+        {
+            selectListItems.Add(new SelectListItem
+            {
+                Text = product.Name,
+                Value = product.Id.ToString()
+            });
+        }
+
+    }
+
+}
+
+<script>
+
+    function llamarVistaParcial()
+    {
+        $.ajax(
+        {
+            cache: false,
+            async: true,
+            type: "GET",
+            url: '@Url.Action("ShowProductPartialView", "Home")',
+            data: {},
+            success: function (response) {
+                $('#resultado').html('');
+                $('#resultado').html(response);
+            }
+        });
+    }
+
+</script>
